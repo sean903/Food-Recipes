@@ -6,13 +6,17 @@ import requests
 import json
 import time
 import pickle
+from pathlib import Path
+import base64
 from ast import literal_eval
 
-recipes10_df = pd.read_csv('./data/recipes_clean_10k_df.csv')
-for count, value in enumerate(recipes10_df['RecipeIngredientParts']):
-    recipes10_df['RecipeIngredientParts'][count] = literal_eval(recipes10_df['RecipeIngredientParts'][count])
 
-navigation = st.sidebar.radio("Navigation", ['Seans Fushion Recipes', "What's left in the fridge?", 'Search recipes'])
+sidebar_title = st.sidebar.header('Navigation')
+navigation = st.sidebar.radio('',['Seans Fushion Recipes', "What's left in the fridge?", 'Search recipes'])
+st.sidebar.markdown('''
+<small>Summary of the [docs](https://docs.streamlit.io/en/stable/api.html), as of [Streamlit v1.0.0](https://www.streamlit.io/).</small>
+    ''', unsafe_allow_html=True)
+
 
 if navigation == "What's left in the fridge?":
     st.title("What's left in the fridge?")
@@ -43,6 +47,9 @@ if navigation == "What's left in the fridge?":
         st.markdown('Instructions: ' + instructions)
         
 if navigation == 'Search recipes':
+    recipes10_df = pd.read_csv('./data/recipes_clean_10k_df.csv')
+    for count, value in enumerate(recipes10_df['RecipeIngredientParts']):
+        recipes10_df['RecipeIngredientParts'][count] = literal_eval(recipes10_df['RecipeIngredientParts'][count])
     st.title('Search recipes')
     search_ingredients = st.text_input('Input ingredients followed by a comma and space', value="", max_chars=None, key=None, type="default", help=None, autocomplete=None, on_change=None, args=None, kwargs=None, placeholder='e.g. bacon, ham, cheese')
     
@@ -59,5 +66,11 @@ if navigation == 'Search recipes':
                     
         user_search(search_ingredients.split(', '))    
             
-        
-    
+
+def img_to_bytes(img_path):
+    img_bytes = Path(img_path).read_bytes()
+    encoded = base64.b64encode(img_bytes).decode()
+    return encoded
+       
+# st.sidebar.markdown('''[<img src='data:image/png;base64,{}' class='img-fluid' width=32 height=32>](https://streamlit.io/)'''.format(img_to_bytes("logomark_website.png")), unsafe_allow_html=True)
+
