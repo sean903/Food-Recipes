@@ -33,7 +33,11 @@ if navigation == "What's left in the fridge?":
 
     if fridge_ingredients:
         with st.spinner('Creating your recipe...'):
-            time.sleep(5)
+            time.sleep(1)
+        
+        def query(payload):
+            response = requests.post(API_URL, headers=headers, json=payload)
+            return response.json()
             
         output = query({"inputs": fridge_ingredients})
         str_output = json.dumps(output)
