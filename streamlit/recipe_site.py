@@ -25,7 +25,7 @@ st.sidebar.markdown('''
 if navigation == "What's left in the fridge?":
     st.title("What's left in the fridge?")
 
-    fridge_ingredients = st.text_input('Input ingredients followed by a comma and space', value="", max_chars=None, key=None, type="default", help=None, autocomplete=None, on_change=None, args=None, kwargs=None, placeholder='e.g. bacon, ham, cheese')
+    fridge_ingredients = st.text_input('Input ingredients followed by a comma and space', value="", max_chars=None, key=None, type="default", help=None, autocomplete=None, on_change=None, args=None, kwargs=None)
 
     API_TOKEN = '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'
     API_URL = "https://api-inference.huggingface.co/models/flax-community/t5-recipe-generation"
@@ -82,11 +82,11 @@ if navigation == 'Fushion Recipes':
     
     option = st.selectbox(
      'Pick Cuisine 1',
-     ('Chinese', 'Thai', 'Japanese', 'African', 'Indian'))
+     ('African', 'Thai', 'Japanese', 'Chinese', 'Indian'))
     
     option2 = st.selectbox(
      'Pick Cuisine 2',
-     ('Chinese', 'Thai', 'Japanese', 'African', 'Indian'))
+     ('Indian', 'Thai', 'Japanese', 'Chinese', 'Indian'))
     
     option3= st.selectbox(
      'Pick Ingedient',
