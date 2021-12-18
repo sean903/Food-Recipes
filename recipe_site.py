@@ -20,7 +20,7 @@ from ast import literal_eval
 
 st.sidebar.image("./images/fusion_recipes.png", width = 300)
 sidebar_title = st.sidebar.header('Navigation')
-navigation = st.sidebar.radio('',['Fushion Recipes', "What's left in the fridge?", 'Search recipes'])
+navigation = st.sidebar.radio('',['Fusion Recipes', "What's left in the fridge?", 'Search recipes'])
 
 
 
